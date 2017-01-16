@@ -6,6 +6,6 @@ body {
   font-family: 'Overpass Mono', monospace;
 }
 
-html, body, .root {
+html, body, #root {
 	height: 100%;
 }
