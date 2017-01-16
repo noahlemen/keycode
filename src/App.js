@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { TransitionMotion, spring, presets } from 'react-motion';
+import KeyInfo from './KeyInfo';
+import keycode from 'keycode';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-
     this.state = { keyEventStack: [] };
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleKeyDown(event) {
     const { keyEventStack } = this.state;
 
-    console.log(event);
-
     const newEvent = {
-      keyName: event.key === ' ' ? 'Space' : event.key,
+      keyName: keycode(event.keyCode),
       keyCode: event.keyCode,
       hash: Math.random().toString(36).substring(7)
     };
@@ -30,17 +30,27 @@ class App extends Component {
     event.preventDefault();
   }
 
+  componentDidMount() {
+    this._div.focus();
+  }
+
   componentWillMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('click', this.handleClick);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('click', this.handleClick);
+  }
+
+  handleClick(event) {
+    event.stopPropagation();
+    this._div.focus();
   }
 
   getDefaultStyles() {
     return this.state.keyEventStack.map(
-      event => ({ ...event, style: { height: 0, opacity: 1 } })
+      event =>
+        ({ key: '', data: { ...event }, style: { height: 0, opacity: 1 } })
     );
   }
 
@@ -68,10 +78,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div
+        className="App"
+        onKeyDown={this.handleKeyDown}
+        ref={node => this._div = node}
+        tabIndex="0"
+      >
         <h1>what key code?</h1>
         <h3>press a key to find out</h3>
-        <h5>click to copy key code</h5>
+        <h5>click to copy key code to clipboard</h5>
         <TransitionMotion
           defaultStyles={this.getDefaultStyles()}
           styles={this.getStyledList()}
@@ -81,17 +96,19 @@ class App extends Component {
           {styles => (
               <div>
                 {styles.map(
-                    ({ key, style, data: { keyCode, keyName } }, index) => (
-                      <div style={style} key={key}>
-                        <CopyToClipboard text={keyCode}>
-                          <div
-                            className="keyInfo"
-                            style={{ opacity: 1 / (index + 1) }}
-                          >
-                            <span className="code">{keyCode}</span>
-                            <span className="key">"{keyName}"</span>
-                          </div>
-                        </CopyToClipboard>
+                    (
+                      { key, style, data: { keyCode, keyName, hash } },
+                      index
+                    ) => (
+                      <div style={style} key={hash}>
+                        <KeyInfo
+                          keyCode={keyCode}
+                          listIndex={index}
+                          keyName={keyName}
+                          copied={this.state.copiedHash === hash}
+                          hash={hash}
+                          onCopy={copiedHash => this.setState({ copiedHash })}
+                        />
                       </div>
                     )
                   )}

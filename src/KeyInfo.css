@@ -1,0 +1,39 @@
+.keyInfo {
+  background: #fefefe;
+  color: black;
+  padding: 20px;
+  margin: 20px auto;
+  display: block;
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 0 2px 1px #555;
+  cursor: pointer;
+  transition: opacity 200ms, box-shadow 200ms;
+}
+
+.keyInfo:hover {
+  box-shadow: 0 5px 5px #555;
+  opacity: 1 !important;
+}
+
+.keyInfo.copied {
+  opacity: 1 !important;
+  user-select: none;
+}
+
+.keyInfo .code {
+  display: inline-block;
+  font-weight: bold;
+  text-align: left;
+  width: 50%;
+  white-space: nowrap;
+}
+
+.keyInfo .key {
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  color: #ccc;
+  user-select: none;
+  white-space: nowrap;
+}
