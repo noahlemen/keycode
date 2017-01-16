@@ -42,6 +42,7 @@ class App extends Component {
       <div className="App">
         <h1>what key code?</h1>
         <h3>press a key to find out</h3>
+        <h5>click to copy key code</h5>
         {keyEventStack.map((event, index) =>  <CopyToClipboard text={event.keyCode}><div className="keyInfo" style={{ opacity: 1.5 / (index + 1) }} key={event.hash}><span className="code">{event.keyCode}</span><span className="key">"{event.key}"</span></div></CopyToClipboard>)}
       </div>
     );

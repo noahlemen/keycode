@@ -12,6 +12,12 @@
   border-radius: 20px;
   box-shadow: 0 2px 1px #555;
   cursor: pointer;
+  transition: opacity 200ms, box-shadow 200ms;
+}
+
+.keyInfo:hover {
+  box-shadow: 0 5px 5px #555;
+  opacity: 1 !important;
 }
 
 .keyInfo .code {
