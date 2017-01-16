@@ -1,0 +1,31 @@
+.App {
+  text-align: center;
+}
+
+.keyInfo {
+  background: #fefefe;
+  color: black;
+  padding: 20px;
+  margin: 20px auto;
+  display: block;
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 0 2px 1px #555;
+  cursor: pointer;
+}
+
+.keyInfo .code {
+  display: inline-block;
+  font-weight: bold;
+  text-align: left;
+  width: 50%;
+}
+
+.keyInfo .key {
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  color: #ccc;
+  user-select: none;
+  cursor: ;
+}
