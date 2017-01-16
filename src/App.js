@@ -20,7 +20,8 @@ class App extends Component {
     const newEvent = {
       keyName: keycode(event.keyCode),
       keyCode: event.keyCode,
-      hash: Math.random().toString(36).substring(7)
+      hash: Math.random().toString(36).substring(7),
+      isNice: event.keyCode === 69
     };
 
     this.setState({
@@ -97,7 +98,7 @@ class App extends Component {
               <div>
                 {styles.map(
                     (
-                      { key, style, data: { keyCode, keyName, hash } },
+                      { key, style, data: { keyCode, keyName, hash, isNice } },
                       index
                     ) => (
                       <div style={style} key={hash}>
@@ -108,6 +109,7 @@ class App extends Component {
                           copied={this.state.copiedHash === hash}
                           hash={hash}
                           onCopy={copiedHash => this.setState({ copiedHash })}
+                          isNice={isNice}
                         />
                       </div>
                     )

@@ -9,6 +9,8 @@
   box-shadow: 0 2px 1px #555;
   cursor: pointer;
   transition: opacity 200ms, box-shadow 200ms;
+  position: relative;
+  overflow: visible;
 }
 
 .keyInfo:hover {
@@ -25,15 +27,37 @@
   display: inline-block;
   font-weight: bold;
   text-align: left;
-  width: 50%;
+  width: 25%;
   white-space: nowrap;
 }
 
 .keyInfo .key {
   display: inline-block;
   text-align: right;
-  width: 50%;
+  width: 75%;
   color: #ccc;
   user-select: none;
   white-space: nowrap;
 }
+
+.keyInfo .nice {
+  position: absolute;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  top: 0;
+  bottom: 0;
+  line-height: 2em;
+  height: 2em;
+  font-size: 2em;
+  margin: auto;
+  color: white;
+  pointer-events: none;
+}
+
+.keyInfo .nice.left {
+  right: 110%;
+}
+
+.keyInfo .nice.right {
+  left: 110%;
+}
+
