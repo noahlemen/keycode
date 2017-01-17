@@ -7,3 +7,16 @@
 .App:focus {
   outline: none;
 }
+
+.src-link {
+  background: #333;
+  padding: 4px 10px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0 0 4px black;
+}
+
+.src-link a {
+  color: #ccc;
+}
